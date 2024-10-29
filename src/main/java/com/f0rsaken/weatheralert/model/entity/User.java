@@ -41,7 +41,6 @@ public class User implements Serializable {
     /**
      * 最后更新时间
      */
-    @TableField(value = "updated_time", fill = FieldFill.INSERT)
     private LocalDateTime updatedTime;
 
     /**
