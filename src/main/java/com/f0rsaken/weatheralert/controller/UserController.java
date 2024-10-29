@@ -4,7 +4,7 @@ import com.f0rsaken.weatheralert.common.BaseResponse;
 import com.f0rsaken.weatheralert.common.ResultUtils;
 import com.f0rsaken.weatheralert.model.dto.user.UserLoginDTO;
 import com.f0rsaken.weatheralert.model.dto.user.UserRegisterDTO;
-import com.f0rsaken.weatheralert.model.vo.user.UserRegisterVO;
+import com.f0rsaken.weatheralert.model.vo.user.UserResponseVO;
 import com.f0rsaken.weatheralert.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
  * @Date 2024/10/24
  */
 @Slf4j
-@Api(tags = "用户管理")
+@Api(tags = "用户接口")
 @RestController
 @RequestMapping("/user")
 @Validated
@@ -34,9 +34,9 @@ public class UserController {
 
     @ApiOperation("用户注册")
     @PostMapping("/register")
-    public BaseResponse<UserRegisterVO> register(@Valid @RequestBody UserRegisterDTO userRegisterDTO) {
-        UserRegisterVO userRegisterVO = userService.register(userRegisterDTO);
-        return ResultUtils.success(userRegisterVO);
+    public BaseResponse<UserResponseVO> register(@Valid @RequestBody UserRegisterDTO userRegisterDTO) {
+        UserResponseVO userResponseVO = userService.register(userRegisterDTO);
+        return ResultUtils.success(userResponseVO);
     }
 
     @GetMapping("/verify")
@@ -47,9 +47,9 @@ public class UserController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public BaseResponse<UserRegisterVO> login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
-        UserRegisterVO userRegisterVO = userService.login(userLoginDTO);
-        return ResultUtils.success(userRegisterVO);
+    public BaseResponse<UserResponseVO> login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
+        UserResponseVO userResponseVO = userService.login(userLoginDTO);
+        return ResultUtils.success(userResponseVO);
     }
 
 }

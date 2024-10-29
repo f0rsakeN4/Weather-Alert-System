@@ -8,7 +8,7 @@ import com.f0rsaken.weatheralert.mapper.UserMapper;
 import com.f0rsaken.weatheralert.model.dto.user.UserLoginDTO;
 import com.f0rsaken.weatheralert.model.dto.user.UserRegisterDTO;
 import com.f0rsaken.weatheralert.model.entity.User;
-import com.f0rsaken.weatheralert.model.vo.user.UserRegisterVO;
+import com.f0rsaken.weatheralert.model.vo.user.UserResponseVO;
 import com.f0rsaken.weatheralert.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -41,7 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private EmailUtil emailUtil;
 
     @Override
-    public UserRegisterVO register(UserRegisterDTO userRegisterDTO) {
+    public UserResponseVO register(UserRegisterDTO userRegisterDTO) {
         // 检查用户名是否已存在
         User existingUser = findByUserName(userRegisterDTO.getUsername());
         if (existingUser != null) {
@@ -62,13 +62,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 发送验证邮件
         emailUtil.sendVerificationEmail(userRegisterDTO.getEmail(), verificationCode);
 
-        UserRegisterVO userRegisterVO = new UserRegisterVO();
-        BeanUtils.copyProperties(newUser, userRegisterVO);
-        if (userRegisterVO == null) {
+        UserResponseVO userResponseVO = new UserResponseVO();
+        BeanUtils.copyProperties(newUser, userResponseVO);
+        if (userResponseVO == null) {
             throw new UserException(USER_REGISTER_FAILED.getCode(), USER_REGISTER_FAILED.getMessage());
         }
 
-        return userRegisterVO;
+        return userResponseVO;
 
     }
 
@@ -96,7 +96,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public UserRegisterVO login(UserLoginDTO userLoginDTO) {
+    public UserResponseVO login(UserLoginDTO userLoginDTO) {
         // 根据用户名查找用户
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", userLoginDTO.getUsername());
@@ -111,9 +111,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new UserException(INACTIVE_USER.getCode(), INACTIVE_USER.getMessage());
         }
 
-        UserRegisterVO userRegisterVO = new UserRegisterVO();
-        BeanUtils.copyProperties(user, userRegisterVO);
-        return userRegisterVO;
+        UserResponseVO userResponseVO = new UserResponseVO();
+        BeanUtils.copyProperties(user, userResponseVO);
+        return userResponseVO;
 
     }
 

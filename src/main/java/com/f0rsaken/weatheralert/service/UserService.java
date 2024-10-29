@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.f0rsaken.weatheralert.model.dto.user.UserLoginDTO;
 import com.f0rsaken.weatheralert.model.dto.user.UserRegisterDTO;
 import com.f0rsaken.weatheralert.model.entity.User;
-import com.f0rsaken.weatheralert.model.vo.user.UserRegisterVO;
+import com.f0rsaken.weatheralert.model.vo.user.UserResponseVO;
 
 /**
  * 用户接口
@@ -19,14 +19,14 @@ public interface UserService extends IService<User> {
      * @param userRegisterDTO 用户注册信息
      * @return 注册成功的用户
      */
-    UserRegisterVO register(UserRegisterDTO userRegisterDTO);
+    UserResponseVO register(UserRegisterDTO userRegisterDTO);
 
     /**
      * 用户登录
      * @param userLoginDTO 用户登录信息
      * @return 登录成功的用户信息
      */
-    UserRegisterVO login(UserLoginDTO userLoginDTO);
+    UserResponseVO login(UserLoginDTO userLoginDTO);
 
     Boolean verifyEmail(String code);
 
