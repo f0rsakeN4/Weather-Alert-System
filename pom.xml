@@ -137,7 +137,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.f0rsaken.weatheralert.WeatherAlertSystemApplication</mainClass>
+                    <mainClass>com.f0rsakeN.weatheralert.WeatherAlertSystemApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>
